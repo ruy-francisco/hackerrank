@@ -6,78 +6,38 @@ namespace src
 {
     public class Program
     {
-        // static int twoStacks(int x, int[] a, int[] b) {
-        //     int sum = 0;
-        //     int removed = 0;
-
-        //     int aIndex = 0;
-
-        //     while (aIndex < a.Length && sum + a[aIndex] <= x)
-        //     {
-        //         sum += a[aIndex];
-        //         aIndex++;
-        //     }
-
-        //     removed = aIndex;
-
-        //     int bIndex = 0;
-
-        //     while (bIndex < b.Length && aIndex > 0)
-        //     {
-        //         sum += b[bIndex];
-        //         bIndex++;
-
-        //         while (sum > x && aIndex > 0)
-        //         {
-        //             aIndex--;
-        //             sum -= a[aIndex];
-        //         }
-
-        //         if (sum <= x && aIndex + bIndex > removed)
-        //         {
-        //             removed = aIndex + bIndex;
-        //         }
-        //     }                
-
-        //     return removed;
-        // }
-
-
         static int twoStacks(int x, int[] a, int[] b) {
-            int sumA = 0;
+           int sum = 0;
+            int movedNumber = 0;
             int aIndex = 0;
-            int moved = 0;
-            var usedFromA = new List<int>();
-            
-            while ((sumA + a[aIndex]) <= x)
+
+            while (aIndex < a.Length && (sum + a[aIndex] <= x))
             {
-                usedFromA.Add(a[aIndex]);
-                sumA += a[aIndex];
-                moved++;
+                sum += a[aIndex];
                 aIndex++;
             }
 
-            int sumB = 0;
+            movedNumber = aIndex;
             int bIndex = 0;
 
-            while ((sumB + b[bIndex]) <= x)
+            while (bIndex < b.Length && aIndex >= 0)
             {
-                if ((sumA + b[bIndex]) <= x)
+                sum += b[bIndex];
+                bIndex++;
+
+                while (sum > x && aIndex > 0)
                 {
-                    sumA += b[bIndex];
-                    sumB += b[bIndex];
-                    moved++;
-                    bIndex++;
-                    continue;
+                    aIndex--;
+                    sum -= a[aIndex];
                 }
 
-                sumA += b[bIndex] - usedFromA[0];
-                usedFromA.RemoveAt(0);
-                sumB += b[bIndex];
-                bIndex++;
+                if (sum <= x && aIndex + bIndex > movedNumber)
+                {
+                    movedNumber = aIndex + bIndex;
+                }
             }
-
-            return moved;
+            return movedNumber;
+        
         }
 
         static void Main(string[] args) {
