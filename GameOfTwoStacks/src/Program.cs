@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace src
 {
@@ -89,8 +90,22 @@ namespace src
                 System.Console.WriteLine("Set the numbers of stack A separed by exactly one blank space");
                 int[] a = Array.ConvertAll(Console.ReadLine().Split(' '), aTemp => Convert.ToInt32(aTemp));
 
+                while (a.Any(e => e > Math.Pow(10, 6)))
+                {
+                    System.Console.WriteLine("Every number in stack A must to be less than 1 million. Set it again.");
+                    a = null;
+                    a = Array.ConvertAll(Console.ReadLine().Split(' '), aTemp => Convert.ToInt32(aTemp));
+                }
+
                 System.Console.WriteLine("Set the numbers of stack B separed by exactly one blank space");
                 int[] b = Array.ConvertAll(Console.ReadLine().Split(' '), bTemp => Convert.ToInt32(bTemp));
+
+                while (b.Any(e => e > Math.Pow(10, 6)))
+                {
+                    System.Console.WriteLine("Every number in stack B must to be less than 1 million. Set it again.");
+                    a = null;
+                    a = Array.ConvertAll(Console.ReadLine().Split(' '), aTemp => Convert.ToInt32(aTemp));
+                }
 
                 int result = twoStacks(x, a, b);
 
