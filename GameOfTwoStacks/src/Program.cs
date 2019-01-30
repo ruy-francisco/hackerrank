@@ -103,8 +103,8 @@ namespace src
                 while (b.Any(e => e > Math.Pow(10, 6)))
                 {
                     System.Console.WriteLine("Every number in stack B must to be less than 1 million. Set it again.");
-                    a = null;
-                    a = Array.ConvertAll(Console.ReadLine().Split(' '), aTemp => Convert.ToInt32(aTemp));
+                    b = null;
+                    b = Array.ConvertAll(Console.ReadLine().Split(' '), aTemp => Convert.ToInt32(aTemp));
                 }
 
                 int result = twoStacks(x, a, b);
