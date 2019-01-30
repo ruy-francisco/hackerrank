@@ -43,18 +43,48 @@ namespace src
         static void Main(string[] args) {
             TextWriter textWriter = new StreamWriter(@"./output/output.txt", false);
 
-
-            System.Console.WriteLine("Set the number of games");
-            int g = Convert.ToInt32(Console.ReadLine());
+            int g = 0;
+            Console.WriteLine("Set the number of games (between 1 and 50)");
+            while (g == 0 || g > 50)
+            {
+                g = Convert.ToInt32(Console.ReadLine());
+            }
 
             for (int gItr = 0; gItr < g; gItr++) {
-                System.Console.WriteLine(@"Set, separed by exactly one blank space, number of integers in stack A, number of integers in stack B and the sum max");
+                Console.WriteLine(@"Set, separed by exactly one blank space, number of integers in stack A (between 1 and 100000), number of integers in stack B (between 1 and 100000) and the sum max");
 
                 string[] nmx = Console.ReadLine().Split(' ');
 
+                while (nmx.Length != 3)
+                {
+                    System.Console.WriteLine("Input in wrong format.");
+                    nmx = null;
+                    nmx = Console.ReadLine().Split(' ');
+                }
+
                 int n = Convert.ToInt32(nmx[0]);
+
+                while (n < 1 || n > Math.Pow(10, 5))
+                {
+                    System.Console.WriteLine("Number of integers in stack A must to be between 1 and 100000. Set it again.");
+                    n = Convert.ToInt32(Convert.ToInt32(Console.ReadLine()));
+                }
+
                 int m = Convert.ToInt32(nmx[1]);
+
+                while (m < 1 || m > Math.Pow(10, 5))
+                {
+                    System.Console.WriteLine("Number of integers in stack B must to be between 1 and 100000. Set it again.");
+                    m = Convert.ToInt32(Convert.ToInt32(Console.ReadLine()));
+                }
+
                 int x = Convert.ToInt32(nmx[2]);
+
+                while (x < 1 || x > Math.Pow(10, 9))
+                {
+                    System.Console.WriteLine("Sum max must to be between 1 and 1 billion. Set it again.");
+                    x = Convert.ToInt32(Convert.ToInt32(Console.ReadLine()));
+                }
                 
                 System.Console.WriteLine("Set the numbers of stack A separed by exactly one blank space");
                 int[] a = Array.ConvertAll(Console.ReadLine().Split(' '), aTemp => Convert.ToInt32(aTemp));
